@@ -1,11 +1,12 @@
 import React from "react";
-import NetflixHomePage from "./src/screens/homepage";
+import { NavigationContainer } from "@react-navigation/native";
+import AppNavigation from "./src/route/Navigation";
 
 const App = () => {
   return (
-
-      <NetflixHomePage/>
-   
+    <NavigationContainer>
+      <AppNavigation />
+    </NavigationContainer>
   );
 };
 

@@ -1,45 +1,48 @@
 // App.js
 import React from 'react';
-import { SafeAreaView, ScrollView, StyleSheet, Text, View,Image,Dimensions } from 'react-native';
+import { SafeAreaView, ScrollView, StyleSheet, Text, View,Image,Dimensions, TouchableOpacity, Modal } from 'react-native';
 import { FlatList } from 'react-native';
 import Navbar from '../components/Navbar';
+import { useNavigation } from '@react-navigation/native';
+import { NavigationProp } from '@react-navigation/native';
+import { Model } from '../route/Navigation';
 const { width } = Dimensions.get('window');
+
 
 const DATA = [
   {
     id: '1',
     title: 'Popular on Netflix',
     data: [
-      { id: '101', image: require('../assests/Movies/Jumangi.png') },
-      {
-        id: '102',
-        image: require('../assests/Movies/Wakanda.png'),
-      },
-      {
-        id: '103',
-        image: require('../assests/Movies/Dolittle.png'),
-      }
-    
+      { id: '101', image: require('../assests/Movies/Jumangi.png'), name: 'Jumanji', duration: '2h 3m', description: 'A magical board game unleashes a world of adventure.' },
+      { id: '102', image: require('../assests/Movies/Wakanda.png'), name: 'Black Panther: Wakanda Forever', duration: '2h 41m', description: 'The people of Wakanda fight to protect their home.' },
+      { id: '103', image: require('../assests/Movies/Dolittle.png'), name: 'Dolittle', duration: '1h 41m', description: 'A doctor who can talk to animals embarks on an adventure.' },
     ],
   },
   {
     id: '2',
     title: 'Trending Now',
-    data:[
-      {id:'201',image:require('../assests/Movies/FightRisk.png')},
-    ]
-    
+    data: [
+      { id: '201', image: require('../assests/Movies/FightRisk.png'), name: 'Fight Risk', duration: '1h 30m', description: 'A thrilling action movie.' },
+      { id: '202', image: require('../assests/Movies/Mufasa.png'), name: 'Mufasa: The Lion King', duration: '1h 50m', description: 'The origin story of Mufasa.' },
+    ],
   },
 ];
 
+
 const NetflixHomePage = () => {
-  const renderItem = ({ item }:any) => (
-    <Image source={item.image} style={styles.movieImage} />
+  const navigation = useNavigation<NavigationProp<Model>>();
+  
+  const renderItem = ({ item }: { item: any }) => (
+    <TouchableOpacity onPress={() => navigation.navigate('movieDetails', { movie: item })}>
+       <Image source={item.image} style={styles.movieImage} />
+    </TouchableOpacity>
   );
 
   const renderCategory = ({ item }:any) => (
     <View style={styles.categoryContainer}>
       <Text style={styles.categoryTitle}>{item.title}</Text>
+    
       <FlatList
         horizontal
         data={item.data}
@@ -47,6 +50,7 @@ const NetflixHomePage = () => {
         keyExtractor={(movie) => movie.id}
         showsHorizontalScrollIndicator={false}
       />
+     
     </View>
   );
 
@@ -54,11 +58,13 @@ const NetflixHomePage = () => {
     <SafeAreaView style={styles.container}>
     <Navbar/>
       <ScrollView>
+      
         <FlatList
           data={DATA}
           renderItem={renderCategory}
           keyExtractor={(item) => item.id}
         />
+    
       </ScrollView>
     </SafeAreaView>
   );

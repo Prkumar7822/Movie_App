@@ -11,5 +11,10 @@ const AppWithStore = () => (
     <App />
   </Provider>
 );
+const NewWithStore = () => (
+  <Provider store={store}>
+    <New />
+  </Provider>
+);
 
 AppRegistry.registerComponent(appName, () => AppWithStore);

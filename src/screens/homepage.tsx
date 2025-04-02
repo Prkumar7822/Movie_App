@@ -28,7 +28,7 @@ const DATA = [
     ],
   },
 ];
-
+console.log('NetflixHomePage rendered',DATA);
 
 const NetflixHomePage = () => {
   const navigation = useNavigation<NavigationProp<Model>>();
@@ -56,6 +56,7 @@ const NetflixHomePage = () => {
 
   return (
     <SafeAreaView style={styles.container}>
+    
     <Navbar navigation={navigation}/>
       <ScrollView>
       

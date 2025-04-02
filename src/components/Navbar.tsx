@@ -1,7 +1,18 @@
 import React from "react";
-import { View, Text, TouchableOpacity, Image, StyleSheet, Pressable } from "react-native";
+import { View, Text, TouchableOpacity, Image, StyleSheet, Button } from "react-native";
+import { Model } from "../route/Navigation";
+// Removed unused import
+import { NavigationProp } from "@react-navigation/native";
 
-const Navbar: React.FC = () => {
+// Removed unused type declaration
+
+
+const Navbar = ({ navigation }: { navigation: NavigationProp<Model> }) => {
+  // const navigation = useNavigation<NavigationProp<Props>>();
+
+  const handleLoginPress = () => {
+    navigation.navigate("login");
+  };
   const handleProfilePress = () => {
     console.log("Profile Pressed!");
   };
@@ -15,12 +26,14 @@ const Navbar: React.FC = () => {
           style={styles.profileImage}
         />
       </TouchableOpacity>
+      <Button onPress={() => handleLoginPress()} title="Login" />
     </View>
   );
 };
 
 const styles = StyleSheet.create({
   navbar: {
+    marginTop: 20,
     flexDirection: "row",
     alignItems: "center",
     justifyContent: "space-between",

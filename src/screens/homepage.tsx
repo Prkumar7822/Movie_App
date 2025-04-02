@@ -56,7 +56,7 @@ const NetflixHomePage = () => {
 
   return (
     <SafeAreaView style={styles.container}>
-    <Navbar/>
+    <Navbar navigation={navigation}/>
       <ScrollView>
       
         <FlatList
